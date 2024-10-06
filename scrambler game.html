@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scrambler game</title>
+  <!-- Load CreateJS first -->
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <!-- Then load ZIM.js -->
+  <script src="https://zimjs.org/cdn/10.9.0/zim.js"></script>
+</head>
+<body>
+  <script>
+    // Wait for the page to fully load
+    window.addEventListener("load", function() {
+      console.log("Script Loaded");
+
+      // Create a new ZIM Frame
+      const frame = new zim.Frame({
+        scaling: "fit",
+        width: 1024, // Set your preferred width
+        height: 768, // Set your preferred height
+        color: "white", // Set background color
+        assets: ["https://raw.githubusercontent.com/HUNBUNCH/scrambler/refs/heads/main/RIM.png"] // Specify the image file you're scrambling
+      });
+
+      frame.on("complete", function() {
+        // Frame and assets have been loaded
+        console.log("Frame loaded");
+
+        const stage = frame.stage;
+        const img = frame.asset("RIM.png"); // Load your image from assets
+
+        // Set up the scrambler puzzle
+        const scrambler = new zim.Scrambler({
+          obj: img,    // The image being scrambled
+          cols: 4,     // Number of columns
+          rows: 4,     // Number of rows
+          spacing: 5,  // Spacing between pieces
+          loop: true   // Let the pieces loop while dragging
+        }).center(stage);
+
+        // Update the stage to render the changes
+        stage.update();
+      });
+    });
+  </script>
+</body>
+</html>
